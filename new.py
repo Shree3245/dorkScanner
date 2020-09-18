@@ -23,18 +23,67 @@ parser.add_argument('-Pr', '--process',
                     help='Number of parallel processes', default='1')
 results = parser.parse_args(sys.argv[1:])
 
+engineDict = {
+    'google': {
+        'payload': {
+            'q': 'string',
+            'first': 'start'
+        },
+        'link': 'http://www.google.com/search',
+        'tags': {
+            'options': 'cite',
+            'attr': {
+                'class': 'iUh30'
+            }
+        }
+    },
 
-def googleSearch(string, start):
+    'bing': {
+        'payload': {
+            'q': 'string',
+            'first': 'start'
+        },
+        'link': 'https://www.bing.com/search',
+        'tags': {
+            'options': 'li',
+            'attr': 'b_algo'
+        }
+    },
+
+    'baidu': {
+        'payload': {
+            'q': 'string',
+            'first': 'start'
+        },
+        'link': 'http://www.baidu.com/s',
+        'tags': {
+            'options': 'h3',
+            'attr': 't'
+        }
+    },
+}
+
+
+def search(engine, string, start):
+    engineSearch = engineDict[engine]
     urls = []
-    payload = {'q': string, 'start': start}
     headers = {'User-agent': ua}
-    req = requests.get('http://www.google.com/search',
-                       payload, headers=headers)
+    req = requests.get(engineSearch['link'],
+                       engineSearch['payload'], headers=headers)
     soup = BeautifulSoup(req.text, 'html.parser')
-    h3tags = soup.findAll('cite', attrs={'class': 'iUh30'})
-    for h3 in h3tags:
+    tags = soup.findAll(engineSearch['tags']
+                        ['options'], engineSearch['tags']['attr'])
+
+    for tag in tags:
         try:
-            urls.append(h3.text)
+            if engine == 'google':
+                urls.append(tag.text)
+            elif engine == 'bing':
+                urls.append(tag.find('a').attrs['href'])
+            else:
+                urlu = tag.find('a').attrs['href']
+                link = requests.get(urlu)
+                urls.append(link.url)
         except:
             continue
     return urls

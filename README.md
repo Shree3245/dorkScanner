@@ -28,7 +28,7 @@ pip3 install -r requirements.txt
 - Number of parallel processes
 
 ## Examples
-``` python3 dork-scanner.py --search inurl:php?=id1 --engine google --page 3 --process 3 ```
+``` python3 dScan.py --search inurl:php?=id1 -E bing --page 3 --process 3 ```
 search for inurl:php?=id1 in 3 pages of google using 3 processes
 ## Author
 - Author: Shreeven Kommireddy

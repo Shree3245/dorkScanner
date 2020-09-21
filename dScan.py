@@ -102,7 +102,7 @@ def main():
 	start_time = time.time()
 	result = []
 	pages = []
-
+	website = []
 	for p in range(int(page)):
 		pages.append(p*10)
 		p = Pool(proc)
@@ -116,12 +116,15 @@ def main():
 	for p in listAll:
 		result += [u for u in p]
 		printf(set(result))
+		website.append(set(result))
 
 	print ("\n")
 	print ("#"*50)
 	print( " Number of urls : {}" . format( str( len( result ) ) ))
 	print( " Finished in : {} s" . format( str( int( time.time() - start_time ) )))
 	print ("#"*50)
+
+	
 
 if __name__ == '__main__':
 	main()

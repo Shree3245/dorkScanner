@@ -9,7 +9,7 @@ This script is an automated tool to parse search engines with provided dorks in 
 ## Setup
 Refer to these steps to install the tool on a linux distribution
 ```
-git clone https://github.com/GuestGuri/dork-scanner.git
+git clone https://github.com/Shree3245/dorkScanner.git
 pip3 install -r requirements.txt
 ```
 ## Usage
@@ -31,5 +31,4 @@ pip3 install -r requirements.txt
 ``` python3 dork-scanner.py --search inurl:php?=id1 --engine google --page 3 --process 3 ```
 search for inurl:php?=id1 in 3 pages of google using 3 processes
 ## Author
-- Author: Mohamed Ghassen Gargouri 
-- LinkedIn : https://www.linkedin.com/in/mohamed-ghassen-gargouri/
+- Author: Shreeven Kommireddy
